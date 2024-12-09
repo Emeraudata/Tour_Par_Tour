@@ -13,7 +13,7 @@
 
         public void NewTurn()
         {
-
+            Console.WriteLine("On lance un nouveau tour");
         }
 
     }
