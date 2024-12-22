@@ -8,5 +8,11 @@
         {
             NombrePV = 10;
         }
+
+        public void PertePV(int pvPerdus)
+        {
+            if(NombrePV > 0)
+                NombrePV -= pvPerdus;
+        }
     }
 }

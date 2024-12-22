@@ -4,18 +4,21 @@
     {
         public Player Player { get; private set; }
         public int PointsActions { get; private set; }
+        public Player Joueur { get; private set; }
 
         public PlayerEtat()
         {
             PointsActions = 5;
             SetNom("Joueur");
+            Joueur = GameManager.Instance.Joueur;
         }
 
         public override void Attaque()
         {
             for (int i = 0; i < PointsActions; i++)
             {
-                Console.WriteLine("Le joueur attaque");
+                Console.WriteLine("Le joueur attaque et inflige +1 dégât");
+                GameManager.Instance.EnnemiEtat.PertePV();
             }
         }
 
@@ -29,13 +32,14 @@
         public override void FinDeTour()
         {
             Console.WriteLine("Fin du tour du joueur");
-            this.TurnManager.Transition(new EnnemiEtat());
+            this.TurnManager.SetJoueurAJoue();
+            this.TurnManager.Transition(GameManager.Instance.EnnemiEtat);
 
         }
 
         public override void PertePV()
         {
-            throw new NotImplementedException();
+            Joueur.PertePV(1);
         }
     }
 }

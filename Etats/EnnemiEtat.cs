@@ -9,6 +9,7 @@
         {
             PointsActions = 3;
             SetNom("LeGrandMéchant");
+            Ennemi = GameManager.Instance.Ennemi;
         }
 
         public override void Attaque()
@@ -16,6 +17,7 @@
             for (int i = 0; i < PointsActions; i++)
             {
                 Console.WriteLine($"{Nom} attaque le joueur");
+                GameManager.Instance.JoueurEtat.PertePV();
             }
         }
 
@@ -29,12 +31,14 @@
         public override void FinDeTour()
         {
             Console.WriteLine("Fin du tour de l'ennemi.");
-            this.TurnManager.Transition(new PlayerEtat());
+            this.TurnManager.SetAnnemiAJoue();
+            this.TurnManager.Transition(GameManager.Instance.JoueurEtat);
         }
 
         public override void PertePV()
         {
-            throw new NotImplementedException();
+            Ennemi.PertePV(1);
+            Console.WriteLine($"Il reste {Ennemi.NombrePV}PV après l'attaque de {GameManager.Instance.JoueurEtat.Nom}");
         }
     }
 }

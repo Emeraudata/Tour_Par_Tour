@@ -4,21 +4,32 @@ namespace Tour_Par_Tour
 {
     public class GameManager
     {
-        public GameManager Instance { get; private set; }
-        public TurnManager TurnManager { get; private set; }
+        public static GameManager Instance { get; private set; }
+        public static TurnManager TurnManager { get; private set; }
+        public Player Joueur { get; private set; }
+        public PlayerEtat JoueurEtat { get; private set; }
+        public Ennemi Ennemi { get; private set; }
+        public EnnemiEtat EnnemiEtat { get; private set; }
 
-        public GameManager()
+        private GameManager() { }
+
+        public static GameManager GetInstance()
         {
-            //Instance = new GameManager();
+            if(Instance == null)
+            {
+                Instance = new GameManager();
+            }
+            return Instance;
         }
 
         public void StartANewGame()
         {
-            Player playerOne = new();
-            Player playerTwo = new();
-            PlayerEtat playerEtat = new();
-            TurnManager = new TurnManager(playerEtat);
-            TurnManager.NewTurn(playerEtat);
+            Joueur = new();
+            JoueurEtat = new();
+            Ennemi = new();
+            EnnemiEtat = new();
+            TurnManager = new TurnManager(JoueurEtat);
+            TurnManager.NewTurn(JoueurEtat);
         }
     }
 }

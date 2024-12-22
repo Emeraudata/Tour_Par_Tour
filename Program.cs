@@ -2,5 +2,5 @@
 using Tour_Par_Tour;
 
 Console.WriteLine("Début de la partie en tour par tour.");
-GameManager gameManager = new GameManager();
+var gameManager = GameManager.GetInstance();
 gameManager.StartANewGame();
