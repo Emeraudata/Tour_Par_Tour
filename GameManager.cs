@@ -1,4 +1,6 @@
-﻿namespace Tour_Par_Tour
+﻿using Tour_Par_Tour.Etats;
+
+namespace Tour_Par_Tour
 {
     public class GameManager
     {
@@ -7,15 +9,16 @@
 
         public GameManager()
         {
-            Instance = new GameManager();
+            //Instance = new GameManager();
         }
 
         public void StartANewGame()
         {
             Player playerOne = new();
             Player playerTwo = new();
-            TurnManager = new();
-            TurnManager.NewTurn();
+            PlayerEtat playerEtat = new();
+            TurnManager = new TurnManager(playerEtat);
+            TurnManager.NewTurn(playerEtat);
         }
     }
 }
